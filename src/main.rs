@@ -1,10 +1,24 @@
+// Imports the crate. Also calls `use` on it, for all intents and purposes. We can call any method
+// witin `rand` by calling `rand::method_name`.
+extern crate rand;
+
 // Brings io library into scope. The `std::prelude` only brings a few standard types into scope.
 // You can bring additional into scope via the `use` statement.
 // NOTE: functions more like Alias. Could have called `std::io::stdin` below.
 use std::io;
 
+// The `Rng` trait defines methods that random number generators implement, and this trait must be
+// in scope in order to use the mehods within.
+use rand::Rng;
+
 fn main() {
     println!("Guess the number!");
+
+    // NOTE: `gen_range` is called on the `Rng` trait, which is the result of `thread_rng()`. We
+    // had to `use` that trait aove in order to call `gen_range`.
+    let secret_number = rand::thread_rng().gen_range(1, 101);
+
+    println!("The secret number is {}", secret_number);
 
     println!("Please input your guess.");
 
